@@ -55,10 +55,10 @@ export default function App() {
           setImgCards(prevImg => [...prevImg, ...responseData.results]);
           setShowBtn(responseData.total_pages !== page);
         } else {
-          console.error('Отримано невірні дані від Unsplash:', responseData);
+          console.error('Invalid data received from Unsplash:', responseData);
         }
       } catch (error) {
-        console.error('Помилка отримання зображень:', error);
+        console.error('Error retrieving images:', error);
         setError(true);
       } finally {
         setLoading(false);
@@ -85,12 +85,12 @@ export default function App() {
           <ImageModal isOpen={modalIsOpen} onRequestClose={closeModal} imageUrl={selectedImage} />
         </>
       ) : (
-        !loading && 'No images'
+        !loading
       )}
       {loading ? (
         <RotatingLines />
       ) : (
-        error && <ErrorMessage message="Oops, there was an error, please try reloading 😭" />
+        error && <ErrorMessage message="Oops, there was an error, please try reloading" />
       )}
       {showBtn && imgCards.length > 0 && !loading && <LoadMoreBtn onClick={handleLoadMore} />}
     </>
